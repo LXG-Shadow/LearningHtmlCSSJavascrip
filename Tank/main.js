@@ -101,7 +101,7 @@ function bulletmv(y,bulletid)
 	{
 		clearTimeout("a"+bulletid);
 		var bulletp = document.getElementById("bulletpaper");
-		bulletp.removeChild(document.getElementById("b"+bulletid))
+		bulletp.removeChild(document.getElementById("b"+bulletid));
 	}
 	else
 	{
