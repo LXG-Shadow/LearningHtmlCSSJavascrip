@@ -1,3 +1,5 @@
+bulletid = 0
+
 function checkkey(event) {
 	var evt=event;
 	var evtCode = evt.keyCode;
@@ -73,6 +75,7 @@ function right()
 
 function gntbullet()
 {
+	bulletid = bulletid + 1 ;
 	var pos = document.getElementById("tank");
 	var x = pos.style.left;
 	var y = pos.style.top;
@@ -85,7 +88,26 @@ function gntbullet()
 	insertImg.src = "bullet.png";
 	insertImg.className = "bullet";
 	insertImg.style.position = "absolute";
-	insertImg.style.left = x+"px";
-	insertImg.style.top = y + "px"
+	insertImg.style.left = x + "px";
+	insertImg.style.top = y + "px";
+	insertImg.id = "b" + bulletid;
 	bulletp.appendChild(insertImg);
+	bulletmv(y,bulletid);
+}
+
+function bulletmv(y,bulletid)
+{
+	if (y <= 0) 
+	{
+		clearTimeout("a"+bulletid);
+		var bulletp = document.getElementById("bulletpaper");
+		bulletp.removeChild(document.getElementById("b"+bulletid))
+	}
+	else
+	{
+		var bpos = document.getElementById("b"+bulletid);
+	    y = y-28;
+	    bpos.style.top = y + "px";
+        window["a"+bulletid] = setTimeout(bulletmv,500,y,bulletid);
+	}
 }
