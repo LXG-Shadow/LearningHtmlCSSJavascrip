@@ -118,10 +118,12 @@ function bulletmv(y,bulletid)
 		detecthit(bulletid);
 		var bpos = document.getElementById("b"+bulletid);
 		var y = bpos.style.top;
-		y = parseInt(y.substr(0,y.length-2))-28;
+		//y = parseInt(y.substr(0,y.length-2))-28;
+		y = parseInt(y.substr(0,y.length-2))-1;
 	    //y = y-28;
 	    bpos.style.top = y + "px";
-        window["a"+bulletid] = setTimeout(bulletmv,370,y,bulletid);
+        //window["a"+bulletid] = setTimeout(bulletmv,370,y,bulletid);
+        window["a"+bulletid] = setTimeout(bulletmv,10,y,bulletid);
 	}
 }
 
