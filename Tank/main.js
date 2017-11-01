@@ -147,10 +147,9 @@ function detecthit(bulletid)
 	        {
 	        	clearTimeout("a"+bulletid);
 	        	var bpos = document.getElementById("b"+bulletid);
-	        	bpos.style.top = -40+"px"
-		        var barriersp = document.getElementById("barrierspaper");
-		        barriersp.removeChild(document.getElementById("ba"+i));
-		        barriersid[i] = 0;
+	        	bpos.style.top = -40+"px";
+	        	document.getElementById("ba"+i).src = "barrierhit.png";
+	        	setTimeout(barrierhit,600,i);
 	        }
 		}
 	}
@@ -171,4 +170,11 @@ function gntbarriers()
 	insertImg.style.top = y + "px";
 	insertImg.id = "ba" + barriersidcount;
 	barriersp.appendChild(insertImg);
+}
+
+function barrierhit(i)
+{
+	var barriersp = document.getElementById("barrierspaper");
+	barriersp.removeChild(document.getElementById("ba"+i));
+    barriersid[i] = 0;
 }
