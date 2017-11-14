@@ -4,56 +4,36 @@ var barriersidcount = 9; //障碍计数，生成id
 var autofire = Boolean();//自动开火状态
 var autofiredelay = 650;//自动开火延迟
 var tankmovespeedboost = 1;//坦克移速倍数
-var bulletspeed = 1 //子弹速度
-var keycondition = new Array();
 for (var i=0;i<10;i++) 
 {
 	barriersid[i] = 1;
 }
 
-//循环检测
-setInterval(checkkey,100);
-
-//同时检测
-function checkkeydown(event)
-{
-	var evt = event;
-	var evtCode = evt.keyCode;
-	keycondition[evtCode] = 1;
-
-}
-
-function checkkeyup(event)
-{
-	var evt = event;
-	var evtCode = evt.keyCode;
-	keycondition[evtCode] = 0;
-}
-
 //检测键盘输入
-function checkkey() 
-{
-	if (keycondition[37] == 1) 
+function checkkey(event) {
+	var evt=event;
+	var evtCode = evt.keyCode;
+	if (evtCode == 37) 
 	{
 		left();
 	}
-	if (keycondition[38] == 1) 
+	if (evtCode == 38) 
 	{
 		up();
 	}
-	if (keycondition[39] == 1) 
+	if (evtCode == 39) 
 	{
 		right();
 	}
-	if (keycondition[40] == 1) 
+	if (evtCode == 40) 
 	{
 		down();
 	}
-	if (keycondition[70] == 1)
+	if (evtCode == 70)
 	{
 		gntbullet();
 	}
-	if (keycondition[82] == 1)
+	if (evtCode == 82)
 	{
 		gntbarriers();
 	}
@@ -154,7 +134,7 @@ function bulletmv(y,bulletid)
 	    //y = y-28;
 	    bpos.style.top = y + "px";//更改位置
         //window["a"+bulletid] = setTimeout(bulletmv,370,y,bulletid);
-        window["a"+bulletid] = setTimeout(bulletmv,parseInt(10/bulletspeed),y,bulletid);//循环
+        window["a"+bulletid] = setTimeout(bulletmv,10,y,bulletid);//循环
 	}
 }
 
@@ -275,7 +255,7 @@ function systemcommand()
 	          	setting = setting.toUpperCase();
 	          	switch(setting)
 	          	{
-	          		case "AUTOFIREDELAY": //自动开火延迟设定
+	          		case "AUTOFIREDELAY":
 	          		  var delay = parseInt(prompt("Enter the delay(in ms)[default:650]:",autofiredelay+""));
 	          		  if (delay != null && delay != "" && !isNaN(delay)) 
 	          		  {
@@ -287,22 +267,11 @@ function systemcommand()
 	          		  	alert("Not A Number")
 	          		  }
 	          		  break;
-	          		case "TANKSPEED" : //坦克移速设定
+	          		case "TANKSPEED" :
 	          		  var speedfactor = parseFloat(prompt("Enter the multiple of speed:[default: 1]",tankmovespeedboost+""));
 	                  if (speedfactor != null && speedfactor != "" && !isNaN(speedfactor))
 	                  {
 	          	        tankmovespeedboost = speedfactor;
-	                  }
-	                  else
-	                  {
-	          	        alert("Not A Number");
-	                  }
-	                  break;
-	                case "BULLETSPEED" : //子弹速度设定
-	                  var speedfactor = parseFloat(prompt("Enter the multiple of speed:[default: 1]",bulletspeed+""));
-	                  if (speedfactor != null && speedfactor != "" && !isNaN(speedfactor))
-	                  {
-	          	        bulletspeed = speedfactor;
 	                  }
 	                  else
 	                  {
