@@ -6,6 +6,7 @@ Oct.30.2017: Complete All.<br>
 Oct.31.2017: Add smooth movement of bullet.<br>
 Nov.1.2017: Add animation after barriers are hit.<br>
 Nov.2.2017: Add command<br>
+Nov.15.2017: Add SwithPage<br>
 
 Instruction Of Game Tank：<br>
 Tank Control:<br>
@@ -16,3 +17,4 @@ Tank Control:<br>
 F: Fire<br>
 Other:<br>
 R: Generate a new barrier<br>
+Q: Switch page<br>

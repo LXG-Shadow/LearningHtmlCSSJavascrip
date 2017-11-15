@@ -2,7 +2,7 @@ var keycondition = new Array();
 var click = 0;
 var clicka = 0;
 //循环检测
-setInterval(checkkey,100);
+setInterval(checkkey,10);
 //循环cps重置
 setInterval(clearcps,1000);
 

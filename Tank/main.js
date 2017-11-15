@@ -6,13 +6,14 @@ var autofiredelay = 650;//自动开火延迟
 var tankmovespeedboost = 1;//坦克移速倍数
 var bulletspeed = 1 //子弹速度
 var keycondition = new Array();
+var quitpage = "<h class=\"quittitle\">我在学习我在学习我在学习我在学习我在学习</h><img src=\"quitpage.jpg\">";
 for (var i=0;i<10;i++) 
 {
 	barriersid[i] = 1;
 }
 
 //循环检测
-setInterval(checkkey,100);
+setInterval(checkkey,90);
 
 //同时检测
 function checkkeydown(event)
@@ -57,10 +58,29 @@ function checkkey()
 	{
 		gntbarriers();
 	}
+	if (keycondition[81] == 1)
+	{
+		quit();
+	}
 	//if (evtCode == 71) 
 	//{
 		//systemcommand();
 	//}
+}
+
+//切换
+function quit()
+{
+	keycondition[81] = 0;
+	var bulletp = document.getElementById("bulletpaper");
+	if (bulletp != null)
+	{
+		bulletp.innerHTML = "";
+	}
+	var wholebodyhtml = document.body.innerHTML;
+	var wholebody = document.body;
+	wholebody.innerHTML= quitpage;
+	quitpage = wholebodyhtml;
 }
 
 function getClass(obj,name)
