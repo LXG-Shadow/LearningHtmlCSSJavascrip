@@ -7,6 +7,8 @@ var tankmovespeedboost = 1;//坦克移速倍数
 var bulletspeed = 1 //子弹速度
 var keycondition = new Array();
 var quitpage = "<h class=\"quittitle\">我在学习我在学习我在学习我在学习我在学习</h><img src=\"quitpage.jpg\">";
+var autogntbarrierdelay = 650;//自动生成障碍延迟
+var autogen = Boolean();
 for (var i=0;i<10;i++) 
 {
 	barriersid[i] = 1;
@@ -248,6 +250,20 @@ function autogntbullet()
 	}	
 }
 
+//自动生成障碍
+function autogntbarriers()
+{
+	if (autogen)
+	{
+		gntbarriers();
+		autog = setTimeout(autogntbarriers,autogntbarrierdelay);
+	}
+	else
+	{
+		clearTimeout(autog);
+	}	
+}
+
 //摧毁所有障碍
 function destoryallbarriers()
 {
@@ -329,6 +345,18 @@ function systemcommand()
 	          	        alert("Not A Number");
 	                  }
 	                  break;
+	                case "AUTOGENERATEBARRIERSDELAY": //自动生成障碍物延迟设定
+	          		  var delay = parseInt(prompt("Enter the delay(in ms)[default:650]:",autogntbarrierdelay+""));
+	          		  if (delay != null && delay != "" && !isNaN(delay)) 
+	          		  {
+	          		  	autofiredelay = delay;
+	          		  	alert("AutoGenerateBarriersDelay Change Into "+autogntbarrierdelay+"ms");
+	          		  }
+	          		  else
+	          		  {
+	          		  	alert("Not A Number")
+	          		  }
+	          		  break; 
 	          		default :
 	          		  alert("No Setting Found");
 	          		  break;
@@ -342,6 +370,10 @@ function systemcommand()
 	        case "GENERATEBARRIERS":
 	          var num = parseInt(prompt("Enter the number of barriers.","10"));
 	          gntcertainamountbarriers(num);
+	          break;
+	        case "AUTOGENERATEBARRIERS":
+	          autogen = !autogen;
+	          autogntbarriers();
 	          break;
 	        case "" :
 	          alert("No Command Enter");
