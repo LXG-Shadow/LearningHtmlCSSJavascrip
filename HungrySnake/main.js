@@ -3,6 +3,7 @@ var food = new Array();
 food[0] = 1;
 var snakedirection = 39;
 var snakelive = Boolean();
+var quitpage = "<h class=\"quittitle\">我在学习我在学习我在学习我在学习我在学习</h><img src=\"quitpage.jpg\">";
 snakeid = 1;
 
 window.onload = function()
@@ -58,10 +59,16 @@ function checkkey(event)
 function quit()
 {
 	keycondition[81] = 0;
-	//var wholebodyhtml = document.body.innerHTML;
-	//var wholebody = document.body;
-	//wholebody.innerHTML= quitpage;
-	//quitpage = wholebodyhtml;
+	var wholebodyhtml = document.body.innerHTML;
+	var wholebody = document.body;
+	snakelive = !snakelive;
+	wholebody.innerHTML= quitpage;
+	quitpage = wholebodyhtml;
+	if (quitpage == "<h class=\"quittitle\">我在学习我在学习我在学习我在学习我在学习</h><img src=\"quitpage.jpg\">")
+	{
+		alert("Press Enter To Continue");
+		move();
+	}
 }
 
 function move()
@@ -86,7 +93,7 @@ function move()
 		    down();
 	    }
 	    detectfood();
-	    moving = setTimeout(move,1000);
+	    moving = setTimeout(move,350);
 	}
 	else
 	{
