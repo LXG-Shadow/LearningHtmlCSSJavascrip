@@ -4,12 +4,14 @@ food[0] = 1;
 var snakedirection = 39;
 var snakelive = Boolean();
 var quitpage = "<h class=\"quittitle\">我在学习我在学习我在学习我在学习我在学习</h><img src=\"quitpage.jpg\">";
+var mode = 1;
 snakeid = 1;
 
 window.onload = function()
 {
 	alert("Press Enter To Start");
 	snakelive = !snakelive;
+	mode = parseInt(prompt("Enter Playing Mode \n0:Died When Hit The Border]:",mode+""));
 	move();
 }
 
@@ -110,8 +112,16 @@ function right()
 	var y = snk.style.top;
 	x = parseInt(x.substr(0,x.length-2));
 	y = parseInt(y.substr(0,y.length-2));
-	snk.style.left = (x+40) +"px";
-	follow(1,x,y);
+	if ((x+40) >= 1200 && mode == 1)
+	{
+	    snk.style.left = 0 +"px";
+	    follow(1,x,y);	
+	}
+	else
+	{
+		snk.style.left = (x+40) +"px";
+	    follow(1,x,y);
+	}
 }
 
 function left()
@@ -121,8 +131,16 @@ function left()
 	var y = snk.style.top;
 	x = parseInt(x.substr(0,x.length-2));
 	y = parseInt(y.substr(0,y.length-2));
-	snk.style.left = (x-40) +"px";
-	follow(1,x,y);
+	if ((x-40) <0  && mode == 1)
+	{
+	    snk.style.left = 1160 +"px";
+	    follow(1,x,y);	
+	}
+	else
+	{
+		snk.style.left = (x-40) +"px";
+	    follow(1,x,y);
+	}
 }
 
 function up()
@@ -132,8 +150,16 @@ function up()
 	var y = snk.style.top;
 	x = parseInt(x.substr(0,x.length-2));
 	y = parseInt(y.substr(0,y.length-2));
-	snk.style.top = (y-40) +"px";
-	follow(1,x,y);
+	if ((y-40) <0  && mode == 1)
+	{
+	    snk.style.top = 480 +"px";
+	    follow(1,x,y);	
+	}
+	else
+	{
+		snk.style.top = (y-40) +"px";
+	    follow(1,x,y);
+	}
 }
 
 function down()
@@ -143,8 +169,16 @@ function down()
 	var y = snk.style.top;
 	x = parseInt(x.substr(0,x.length-2));
 	y = parseInt(y.substr(0,y.length-2));
-	snk.style.top = (y+40) +"px";
-	follow(1,x,y);
+	if ((y+40) >= 520  && mode == 1)
+	{
+	    snk.style.top = 0 +"px";
+	    follow(1,x,y);	
+	}
+	else
+	{
+		snk.style.top = (y+40) +"px";
+	    follow(1,x,y);
+	}
 }
 
 
@@ -163,6 +197,7 @@ function follow(i,l,t)
 	}
 }
 
+
 function detectdie()
 {
 	var snk = document.getElementById("snk0");
@@ -172,8 +207,11 @@ function detectdie()
 	y = parseInt(y.substr(0,y.length-2));
 	if (x >= 1200 || x <0 || y >=520 || y <0)
 	{
-		clearTimeout(moving);
-		snakelive = !snakelive;
+		if (mode == 0)
+		{
+			clearTimeout(moving);
+		    snakelive = !snakelive;
+		}
 	}
 	else
 	{
