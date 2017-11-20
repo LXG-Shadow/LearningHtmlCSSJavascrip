@@ -7,13 +7,17 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body onkeyup="checkkey(event)">
+<body onkeydown="checkkey(event)">
 	<div id="foodlayer">
 		<img src="food.jpg" class="food" style="position: absolute;top: 160px;left: 160px;" id="fd0">
 	</div>
 	<div id="snakelayer" class="snakelayer">
-		<img src="snakehead.png" class="snakebody" style="position: absolute;top: 120px;left: 120px;" id="snk0">
+		<img src="snakehead.png" class="snakehead" style="position: absolute;top: 120px;left: 120px;" id="snk0">
 		<img src="snakebody.png" class="snakebody" style="position: absolute;top: 120px;left: 80px;" id="snk1">
+	</div>
+	<div id="scoreboard" class="scoreboard">
+		<h id="current" class="current">Score: 0</h>
+		<h id="record" class="record">Record: 0</h>
 	</div>
 </body>
 </html>

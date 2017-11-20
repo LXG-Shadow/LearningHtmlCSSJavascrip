@@ -4,14 +4,29 @@ food[0] = 1;
 var snakedirection = 39;
 var snakelive = Boolean();
 var quitpage = "<h class=\"quittitle\">我在学习我在学习我在学习我在学习我在学习</h><img src=\"quitpage.jpg\">";
+var record = 0;
+var current = 0;
+var step = 40;
+var delay = 300;
 var mode = 1;
+
 snakeid = 1;
 
 window.onload = function()
 {
+	if (localStorage.getItem("record") != null)
+	{
+		record = localStorage.getItem("record");
+		var recordsc = document.getElementById("record");
+		recordsc.innerHTML = "Record: " + record;
+	}
+	else
+	{
+		localStorage.setItem("record",0);
+	}
 	alert("Press Enter To Start");
 	snakelive = !snakelive;
-	mode = parseInt(prompt("Enter Playing Mode \n0:Died When Hit The Border]:",mode+""));
+	mode = parseInt(prompt("Enter Playing Mode: \n0: Died When Hit The Border.\n1: Cross The Border When Hit The Border",mode+""));
 	move();
 }
 
@@ -36,19 +51,19 @@ function checkkey(event)
 {
 	var evt = event;
 	var evtCode = evt.keyCode;
-	if (evtCode == 37) 
+	if (evtCode == 37 && snakedirection != 39) 
 	{
 		snakedirection = 37;
 	}
-	if (evtCode == 38) 
+	if (evtCode == 38 && snakedirection != 40) 
 	{
 		snakedirection = 38;
 	}
-	if (evtCode == 39) 
+	if (evtCode == 39 && snakedirection != 37) 
 	{
 		snakedirection = 39;
 	}
-	if (evtCode == 40) 
+	if (evtCode == 40 && snakedirection != 38) 
 	{
 		snakedirection = 40;
 	}
@@ -95,7 +110,7 @@ function move()
 		    down();
 	    }
 	    detectfood();
-	    moving = setTimeout(move,350);
+	    moving = setTimeout(move,delay);
 	}
 	else
 	{
@@ -119,7 +134,7 @@ function right()
 	}
 	else
 	{
-		snk.style.left = (x+40) +"px";
+		snk.style.left = (x+step) +"px";
 	    follow(1,x,y);
 	}
 }
@@ -138,7 +153,7 @@ function left()
 	}
 	else
 	{
-		snk.style.left = (x-40) +"px";
+		snk.style.left = (x-step) +"px";
 	    follow(1,x,y);
 	}
 }
@@ -157,7 +172,7 @@ function up()
 	}
 	else
 	{
-		snk.style.top = (y-40) +"px";
+		snk.style.top = (y-step) +"px";
 	    follow(1,x,y);
 	}
 }
@@ -176,7 +191,7 @@ function down()
 	}
 	else
 	{
-		snk.style.top = (y+40) +"px";
+		snk.style.top = (y+step) +"px";
 	    follow(1,x,y);
 	}
 }
@@ -211,6 +226,7 @@ function detectdie()
 		{
 			clearTimeout(moving);
 		    snakelive = !snakelive;
+		    setrecord();
 		}
 	}
 	else
@@ -226,6 +242,7 @@ function detectdie()
 	        {
 	            clearTimeout(moving);
 		        snakelive = !snakelive;
+		        setrecord();
 		        break;
 	        }
 		}
@@ -277,7 +294,24 @@ function delfood(i)
 {
 	var fdlayer = document.getElementById("foodlayer");
 	fdlayer.removeChild(document.getElementById("fd"+i));
+	current = current +10;
+	var currentsc = document.getElementById("current");
+	currentsc.innerHTML = "Score: "+current;
+	if (current > record)
+	{
+		record = current;
+		var recordsc = document.getElementById("record");
+		recordsc.innerHTML = "Record: " + record;
+	}
 	gntfood();
+}
+
+function setrecord()
+{
+	if (record > localStorage.getItem("record"))
+	{
+		localStorage.record = record;
+	}
 }
 
 function gntfood()
