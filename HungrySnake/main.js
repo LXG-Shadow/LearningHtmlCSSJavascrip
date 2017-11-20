@@ -319,6 +319,20 @@ function gntfood()
 	food[food.length] = 1;
 	x = (Math.floor((Math.random()*30)))*40;
 	y = (Math.floor((Math.random()*13)))*40;
+	for (var i=0;i<=snakeid;i++)
+	{
+		var snkbody = document.getElementById("snk"+i);
+		var x1 = snkbody.style.left;
+		var y1 = snkbody.style.top;
+		x1 = parseInt(x1.substr(0,x1.length-2));
+	    y1 = parseInt(y1.substr(0,y1.length-2));
+	    if (x == x1 && y == y1)
+	    {
+	    	x = (Math.floor((Math.random()*30)))*40;
+	        y = (Math.floor((Math.random()*13)))*40;
+	        i = 0;
+	    }
+	}
 	var fdlayer = document.getElementById("foodlayer");
 	var insertImg = document.createElement("img");
 	insertImg.src = "food.jpg";
