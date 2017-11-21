@@ -40,12 +40,14 @@ body
 	background-color: #FAEBD7;
 	width: 1200px;
 	height: 100px;
+	margin: 0px;
 }
 
 .current
 {
 	font-size: 50px;
-
+	margin: 0px;
+	display: inline;
 }
 
 .record
@@ -53,4 +55,6 @@ body
 	font-size: 50px;
 	position: absolute;
 	left: 600px;
+	margin: 0px;
+	display: inline;
 }

@@ -47,6 +47,16 @@ function checkkeyup(event)
 	keycondition[evtCode] = 0;
 }
 
+function decelerate(event)
+{
+	var evt = event;
+	var evtCode=evt.keyCode;
+	if (evtCode == 32)
+	{
+		delay = 300;
+	}
+}
+
 //检测键盘输入
 function checkkey(event) 
 {
@@ -67,6 +77,10 @@ function checkkey(event)
 	if (evtCode == 40 && snakedirection != 38) 
 	{
 		inputdirection = 40;
+	}
+	if (evtCode == 32)
+	{
+		delay = 120;
 	}
 	if (evtCode == 81)
 	{

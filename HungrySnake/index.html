@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
-<body onkeydown="checkkey(event)">
+<body onkeydown="checkkey(event)" onkeyup="decelerate(event)">
 	<div id="foodlayer">
 		<img src="food.jpg"  alt="food" class="food" style="position: absolute;top: 160px;left: 160px;" id="fd0" />
 	</div>
@@ -16,8 +16,8 @@
 		<img src="snakebody.png" alt="snakebody" class="snakebody" style="position: absolute;top: 120px;left: 80px;" id="snk1" />
 	</div>
 	<div id="scoreboard" class="scoreboard">
-		<h1 id="current" class="current">Score: 0</h1>
-		<h1 id="record" class="record">Record: 0</h1>
+		<p id="current" class="current">Score: 0</p>
+		<p id="record" class="record">Record: 0</p>
 	</div>
 </body>
 </html>
