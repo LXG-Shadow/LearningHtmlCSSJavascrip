@@ -2,6 +2,7 @@ var keycondition = new Array();
 var food = new Array();
 food[0] = 1;
 var snakedirection = 39;
+var inputdirection = snakedirection;
 var snakelive = Boolean();
 var quitpage = "<h class=\"quittitle\">我在学习我在学习我在学习我在学习我在学习</h><img src=\"quitpage.jpg\">";
 var record = 0;
@@ -14,20 +15,20 @@ snakeid = 1;
 
 window.onload = function()
 {
-	if (localStorage.getItem("record") != null)
+	alert("Press Enter To Start");
+	snakelive = !snakelive;
+	mode = parseInt(prompt("Enter Playing Mode: \n0: Died When Hit The Border.\n1: Cross The Border When Hit The Border",mode+""));
+	move();
+	if (window.localStorage.getItem("record") != null)
 	{
-		record = localStorage.getItem("record");
+		record = parseInt(window.localStorage.getItem("record"));
 		var recordsc = document.getElementById("record");
 		recordsc.innerHTML = "Record: " + record;
 	}
 	else
 	{
-		localStorage.setItem("record",0);
+		window.localStorage.setItem("record",0);
 	}
-	alert("Press Enter To Start");
-	snakelive = !snakelive;
-	mode = parseInt(prompt("Enter Playing Mode: \n0: Died When Hit The Border.\n1: Cross The Border When Hit The Border",mode+""));
-	move();
 }
 
 //同时检测
@@ -53,19 +54,19 @@ function checkkey(event)
 	var evtCode = evt.keyCode;
 	if (evtCode == 37 && snakedirection != 39) 
 	{
-		snakedirection = 37;
+		inputdirection = 37;
 	}
 	if (evtCode == 38 && snakedirection != 40) 
 	{
-		snakedirection = 38;
+		inputdirection = 38;
 	}
 	if (evtCode == 39 && snakedirection != 37) 
 	{
-		snakedirection = 39;
+		inputdirection = 39;
 	}
 	if (evtCode == 40 && snakedirection != 38) 
 	{
-		snakedirection = 40;
+		inputdirection = 40;
 	}
 	if (evtCode == 81)
 	{
@@ -90,6 +91,7 @@ function quit()
 
 function move()
 {
+	snakedirection = inputdirection;
 	detectdie();
 	if (snakelive)
 	{
@@ -117,6 +119,7 @@ function move()
 		//var snklayer = document.getElementById("snakelayer");
 		//snklayer.innerHTML = "";
 		alert("GAME OVER");
+		setrecord();
 	}
 }
 
@@ -226,7 +229,6 @@ function detectdie()
 		{
 			clearTimeout(moving);
 		    snakelive = !snakelive;
-		    setrecord();
 		}
 	}
 	else
@@ -242,7 +244,6 @@ function detectdie()
 	        {
 	            clearTimeout(moving);
 		        snakelive = !snakelive;
-		        setrecord();
 		        break;
 	        }
 		}
@@ -267,27 +268,32 @@ function detectfood()
 	        fy = parseInt(fy.substr(0,fy.length-2));
 	        if (fx == x && fy == y) 
 	        {
-	        	var snklayer = document.getElementById("snakelayer");
-	            var insertImg = document.createElement("img");
-	            var lastbody = document.getElementById("snk" + snakeid);
-	            var x1 = lastbody.style.left;
-	            var y1 = lastbody.style.top;
-	            x1 = parseInt(x1.substr(0,x1.length-2));
-	            y1 = parseInt(y1.substr(0,y1.length-2)); 
-	            insertImg.src = "snakebody.png";
-	            insertImg.className = "snakebody";
-	            insertImg.style.position = "absolute";
-	            insertImg.style.left = x1 + "px";
-	            insertImg.style.top = y1 + "px";
-	            snakeid = snakeid + 1;
-	            insertImg.id = "snk" + snakeid;
-	            snklayer.appendChild(insertImg);
+	        	insertsnk();
 			    food[i] = 0;
 			    delfood(i);
 			    break;
 	        }
 		}
 	}
+}
+
+function insertsnk()
+{
+	var snklayer = document.getElementById("snakelayer");
+	var insertImg = document.createElement("img");
+	var lastbody = document.getElementById("snk" + snakeid);
+	var x1 = lastbody.style.left;
+	var y1 = lastbody.style.top;
+	x1 = parseInt(x1.substr(0,x1.length-2));
+	y1 = parseInt(y1.substr(0,y1.length-2)); 
+	insertImg.src = "snakebody.png";
+	insertImg.className = "snakebody";
+	insertImg.style.position = "absolute";
+	insertImg.style.left = x1 + "px";
+	insertImg.style.top = y1 + "px";
+	snakeid = snakeid + 1;
+	insertImg.id = "snk" + snakeid;
+	snklayer.appendChild(insertImg);
 }
 
 function delfood(i)
@@ -308,9 +314,9 @@ function delfood(i)
 
 function setrecord()
 {
-	if (record > localStorage.getItem("record"))
+	if (record > parseInt(window.localStorage.getItem("record")))
 	{
-		localStorage.record = record;
+		window.localStorage.setItem("record",record);
 	}
 }
 
