@@ -16,7 +16,7 @@ snakeid = 1;
 window.onload = function()
 {
 	alert("Press Enter To Start");
-	snakelive = !snakelive;
+	snakelive = true;
 	mode = parseInt(prompt("Enter Playing Mode: \n0: Died When Hit The Border.\n1: Cross The Border When Hit The Border",mode+""));
 	move();
 	if (window.localStorage.getItem("record") != null)
@@ -257,7 +257,7 @@ function detectdie()
 	        if (x == x1 && y == y1)
 	        {
 	            clearTimeout(moving);
-		        snakelive = !snakelive;
+		        snakelive = false;
 		        break;
 	        }
 		}
